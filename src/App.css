@@ -90,8 +90,9 @@
 
 .slider > a {
   display: inline-flex;
-  width: 2rem;
-  height: 2rem;
+  margin-top: 0.5vw;
+  width: 0.6vw;
+  height: 0.6vw;
   color: black;
   background: gainsboro;
   text-decoration: none;
@@ -108,4 +109,27 @@
 
 .slider > a:hover {
   background: tomato;
+}
+
+.prev{
+  width: 3vw;
+    height: 3vw;
+    border-radius: 50%;
+    border: antiquewhite;
+    position: absolute;
+    left: 16vw;
+    top: 22vw;
+    font-size: 2vw;
+    font-weight: bold;
+}
+.next{
+  width: 3vw;
+    height: 3vw;
+    border-radius: 50%;
+    border: antiquewhite;
+    position: absolute;
+    top: 22vw;
+    right: 16vw;
+    font-size: 2vw;
+    font-weight: bold;
 }
