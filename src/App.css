@@ -1,3 +1,6 @@
+* {
+  box-sizing: border-box;
+}
 .header{
   background-color: #282c34;
   padding-left: 5%;
@@ -19,12 +22,13 @@
   justify-content: space-between;
 }
 .album{
-  width: 25%;
+  width: 30%;
   height: 15vw;
   background-color: gainsboro;
   margin-bottom: 3%;
   padding: 2%;
   display: flex;
+  text-align: center;
   justify-content: center;
   align-items: center;
   cursor: pointer;
@@ -35,10 +39,73 @@
 }
 
 .Photos-list{
-  padding: 5%
+  padding: 5%;
 }
 .photo{
   width:60%;
   margin: auto;
   height: 40vw;
+}
+
+
+
+
+
+.slider {
+  width: 60%;
+  text-align: center;
+  overflow: hidden;
+  margin: auto;
+}
+
+.slides {
+  display: flex;
+  overflow-x: auto;
+  scroll-behavior: smooth;
+  -webkit-overflow-scrolling: touch;
+  
+}
+.slides::-webkit-scrollbar {
+  width: 10px;
+  height: 10px;
+}
+.slides::-webkit-scrollbar-thumb {
+  background: black;
+  border-radius: 10px;
+}
+
+.slides > div {
+  scroll-snap-align: start;
+  flex-shrink: 0;
+  width: 100%;
+  height: 30vw;
+  margin-right: 50px;
+  border-radius: 10px;
+  transition: transform 0.5s;
+  position: relative;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.slider > a {
+  display: inline-flex;
+  width: 2rem;
+  height: 2rem;
+  color: black;
+  background: gainsboro;
+  text-decoration: none;
+  align-items: center;
+  justify-content: center;
+  border-radius: 50%;
+  margin: 0 0.5em 0.5rem 0;
+  position: relative;
+}
+
+.slider > a:focus {
+  background: tomato;
+}
+
+.slider > a:hover {
+  background: tomato;
 }
