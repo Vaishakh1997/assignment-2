@@ -25,11 +25,9 @@ class Photos extends Component {
             targetID = this.props.location.hash
         else
             targetID = "#1"
-        while (targetID.charAt(0) === '#')
-            targetID = targetID.slice(1);
+        targetID = targetID.slice(1);
         if(targetID !== "1")
             targetID = parseInt(targetID)-1
-        this.props.history.push(`#${targetID}`)
         window.location = `/albums/${this.props.match.params.albumId}#${targetID}`
     }
 
@@ -39,10 +37,8 @@ class Photos extends Component {
             targetID = this.props.location.hash
         else
             targetID = "#1"
-        while (targetID.charAt(0) === '#')
-            targetID = targetID.slice(1);
+        targetID = targetID.slice(1);
         targetID = parseInt(targetID)+1
-        this.props.history.push(`#${targetID}`)
         window.location = `/albums/${this.props.match.params.albumId}#${targetID}`
     }
     

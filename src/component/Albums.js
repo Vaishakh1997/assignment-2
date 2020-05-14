@@ -16,13 +16,10 @@ class Albums extends Component {
             method: 'get',
             url: `https://jsonplaceholder.typicode.com/albums`
           })
-            .then(response=> {
-                this.setState({albumsData:response.data})
-            })
-            .catch(error=>{
-                console.error(error)
-            })
+            .then(response=> this.setState({albumsData:response.data}))
+            .catch(error=> console.error(error))
     }
+    
     render() { 
         return ( 
             <React.Fragment>
