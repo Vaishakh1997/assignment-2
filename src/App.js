@@ -6,6 +6,7 @@ import Photos from './component/Photos'
 import Header from './component/Header';
 
 function App() {
+
   return (
     <Router>
       <Header/>

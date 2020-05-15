@@ -1,38 +1,42 @@
 import React, { Component } from 'react';
 import '../App.css'
+import {useEffect } from 'react'
+import {connect} from 'react-redux'
+import { fetchAlbums } from '../actions'
+import { fetchAlbumsRequest } from '../actions';
+import { useSelector, useDispatch } from 'react-redux'
 const axios = require('axios');
 
-class Albums extends Component {
-    state = { 
-        albumsData:[]
-     }
+function Albums({fetchAlbums}){
 
-    goToPhotos = (albumId) => {
-        this.props.history.push(`/albums/${albumId}`)
-    }
+    useEffect(() =>{
+        fetchAlbums()
+    },[])
 
-    componentDidMount(){
-        axios({
-            method: 'get',
-            url: `https://jsonplaceholder.typicode.com/albums`
-          })
-            .then(response=> this.setState({albumsData:response.data}))
-            .catch(error=> console.error(error))
-    }
-    
-    render() { 
+ 
         return ( 
             <React.Fragment>
-                <div className="albums-list">
+                {/* <div className="albums-list">
                     {this.state.albumsData.map(album=>{
                         return (<div className="album" key={album.id} onClick={()=>this.goToPhotos(album.id)}>
                             <h2>{album.title}</h2>
                         </div>)
                     })}
-                </div>
+                </div> */}
             </React.Fragment>
          );
+}
+
+const mapStateToProps = state =>{
+    return {
+        albums: state.albums
     }
 }
- 
-export default Albums;
+
+const mapDispatchToProps = dispatch =>{
+    return{
+        fetchAlbums:() => dispatch(fetchAlbums())
+    }
+}
+
+export default connect (mapStateToProps, mapDispatchToProps)(Albums);
