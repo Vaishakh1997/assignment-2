@@ -1,4 +1,3 @@
-import axios from 'axios'
 
 const FETCH_ALBUMS_REQUEST = 'FETCH_ALBUMS_REQUEST'
 const FETCH_ALBUMS_SUCCESS = 'FETCH_ALBUMS_SUCCESS'
@@ -53,33 +52,3 @@ export const fetchPhotosError = error => {
 
 
 
-export const fetchAlbums = () => {
-    return function(dispatch){
-        dispatch(fetchAlbumsRequest())
-        axios({
-            method: 'get',
-            url: `https://jsonplaceholder.typicode.com/albums`
-          })
-            .then(response=> 
-                dispatch(fetchAlbumsSuccess(response.data))
-                )
-            .catch(error=> dispatch(fetchAlbumsError(error)))
-    }
-}
-
-export const fetchPhotos = (albumId) => {
-    return function(dispatch){
-        dispatch(fetchPhotosRequest())
-        axios({
-            method: 'get',
-            url: `https://jsonplaceholder.typicode.com/photos?albumId=${albumId}`
-          })
-        .then(response => {
-            console.log(response.data)
-            var allImageURL = []
-            response.data.map(photo => allImageURL.push(photo.url))
-            dispatch(fetchPhotosSuccess(allImageURL))
-        })
-        .catch(error => dispatch(fetchPhotosError(error)))
-    }
-}

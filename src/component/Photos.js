@@ -1,8 +1,6 @@
 import React, { Component } from 'react';
-import { fetchPhotos } from '../actions';
-import {connect} from 'react-redux'
-import { createBrowserHistory } from 'history';
-const axios = require('axios');
+import { fetchPhotos } from '../Fetch-API/api-fetch';
+import { connect } from 'react-redux'
 class Photos extends Component {
     componentDidMount() {
         const { albumId } = this.props.match.params
@@ -12,19 +10,17 @@ class Photos extends Component {
     render() {
         const { loading, photos, error } = this.props
 
-     
-
         return loading === true ?
-         <div>Loading...</div> :
-         <React.Fragment>
-                 <div className="Photos-list">
-                     {/* <button className="prev" onClick={this.prevSlide}>
+            <div>Loading...</div> :
+            <React.Fragment>
+                <div className="Photos-list">
+                    {/* <button className="prev" onClick={this.prevSlide}>
                          {prev}
                      </button> */}
 
-                     <div className="slider">
-                         <div className="slides">
-                             {photos.map((url, index) => {
+                    <div className="slider">
+                        <div className="slides">
+                            {photos.map((url, index) => {
                                 return (
                                     <div id={index + 1} key={index}>
                                         <img
@@ -50,25 +46,22 @@ class Photos extends Component {
                     </button> */}
                 </div>
             </React.Fragment>
-
-     
-      }
+    }
 }
 
 const mapStateToProps = (state) => {
     return {
-      loading: state.photosReducer.loading,
-      photos: state.photosReducer.photos,
-      error: state.photosReducer.error,
+        loading: state.photosReducer.loading,
+        photos: state.photosReducer.photos,
+        error: state.photosReducer.error,
     }
-  }
-  
-  const mapDispatchToProps = (dispatch) => {
-    return {
-      photosList: (albumId) => dispatch(fetchPhotos(albumId)),
-    }
-  }
-  
-  export default connect(mapStateToProps, mapDispatchToProps)(Photos)
+}
 
-    
+const mapDispatchToProps = (dispatch) => {
+    return {
+        photosList: (albumId) => dispatch(fetchPhotos(albumId)),
+    }
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(Photos)
+
