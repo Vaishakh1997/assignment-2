@@ -2,9 +2,9 @@ import albumsReducer from './albums'
 import photosReducer from './photos'
 import { combineReducers } from 'redux'
 
-const allReducers = combineReducers({
-    albumsData: albumsReducer,
-    imagesDate: photosReducer
+const rootReducers = combineReducers({
+    albumsReducer: albumsReducer,
+    photosReducer: photosReducer
 })
 
-export default allReducers
+export default rootReducers

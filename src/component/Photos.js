@@ -1,61 +1,30 @@
 import React, { Component } from 'react';
+import { fetchPhotos } from '../actions';
+import {connect} from 'react-redux'
+import { createBrowserHistory } from 'history';
 const axios = require('axios');
 class Photos extends Component {
-    state = {
-        imageURL: '',
-        allImageURL: [],
-    }
-
     componentDidMount() {
-        axios({
-            method: 'get',
-            url: `https://jsonplaceholder.typicode.com/photos?albumId=${this.props.match.params.albumId}`
-        })
-            .then(response => {
-                var allImageURL = []
-                response.data.map(photo => allImageURL.push(photo.url))
-                this.setState({allImageURL: allImageURL })
-            })
-            .catch(error => console.error(error))
+        const { albumId } = this.props.match.params
+        this.props.photosList(albumId)
     }
 
-    prevSlide = () => {
-        let targetID;
-        if(this.props.location.hash)
-            targetID = this.props.location.hash
-        else
-            targetID = "#1"
-        targetID = targetID.slice(1);
-        if(targetID !== "1")
-            targetID = parseInt(targetID)-1
-        window.location = `/albums/${this.props.match.params.albumId}#${targetID}`
-    }
-
-    nextSlide = () => {
-        let targetID;
-        if(this.props.location.hash)
-            targetID = this.props.location.hash
-        else
-            targetID = "#1"
-        targetID = targetID.slice(1);
-        targetID = parseInt(targetID)+1
-        window.location = `/albums/${this.props.match.params.albumId}#${targetID}`
-    }
-    
     render() {
-        let prev="<"
-        let next=">"
+        const { loading, photos, error } = this.props
 
-        return (
-            <React.Fragment>
-                <div className="Photos-list">
-                    <button className="prev" onClick={this.prevSlide}>
-                        {prev}
-                    </button>
+     
 
-                    <div className="slider">
-                        <div className="slides">
-                            {this.state.allImageURL.map((url, index) => {
+        return loading === true ?
+         <div>Loading...</div> :
+         <React.Fragment>
+                 <div className="Photos-list">
+                     {/* <button className="prev" onClick={this.prevSlide}>
+                         {prev}
+                     </button> */}
+
+                     <div className="slider">
+                         <div className="slides">
+                             {photos.map((url, index) => {
                                 return (
                                     <div id={index + 1} key={index}>
                                         <img
@@ -68,7 +37,7 @@ class Photos extends Component {
                             })}
                         </div>
 
-                        {this.state.allImageURL.map((url, index) => {
+                        {photos.map((url, index) => {
                             let targetID = `#${index + 1}`;
                             return (
                                 <a href={targetID} key={targetID}></a>
@@ -76,13 +45,30 @@ class Photos extends Component {
                         })}
                     </div>
 
-                    <button className="next" onClick={this.nextSlide}>
+                    {/* <button className="next" onClick={this.nextSlide}>
                         {next}
-                    </button>
+                    </button> */}
                 </div>
             </React.Fragment>
-        );
-    }
+
+     
+      }
 }
 
-export default Photos;
+const mapStateToProps = (state) => {
+    return {
+      loading: state.photosReducer.loading,
+      photos: state.photosReducer.photos,
+      error: state.photosReducer.error,
+    }
+  }
+  
+  const mapDispatchToProps = (dispatch) => {
+    return {
+      photosList: (albumId) => dispatch(fetchPhotos(albumId)),
+    }
+  }
+  
+  export default connect(mapStateToProps, mapDispatchToProps)(Photos)
+
+    
