@@ -1,10 +1,10 @@
-// import albumsReducer from './albums'
-// import photosReducer from './photos'
-// import { combineReducers } from 'redux'
+import albumsReducer from './albums'
+import photosReducer from './photos'
+import { combineReducers } from 'redux'
 
-// const allReducers = combineReducers({
-//     albumsData: albumsReducer,
-//     imagesDate: photosReducer
-// })
+const allReducers = combineReducers({
+    albumsData: albumsReducer,
+    imagesDate: photosReducer
+})
 
-// export default allReducers
+export default allReducers
