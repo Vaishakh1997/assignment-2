@@ -1,33 +1,38 @@
-import React from 'react'
+import React, { lazy } from 'react'
 import '../App.css'
-import store from '../store'
-import { keyframes, css } from 'styled-components'
 
 function Carousel({images}){
-    const totalImages = 100/images.length
+    
+    const transitionPercentage = 100/images.length
+    const length = images.length
 
-    let totalTansition = images.map((image, index) => {
-        return `${totalImages * index}%  { transform: translateX(-${100*index}%)}` 
+    let transitionArray = images.map((url, index) => {
+        return `${transitionPercentage * (index)}%  { transform: translateX(-${100*index}%)}` 
     })
 
-    let slideShow = keyframes`
-    ${totalTansition} 100s ease-out 1s infinite
-    `
+    let slide = `@keyframes slide {
+        ${transitionArray.join('')}
+    }`
 
-    // const animation = css`animation: ${slideShow} 100s ease-out 1s infinite`
+    let style = {
+        minWidth: '100%',
+        height: '100%',
+        overflowY: 'hidden',
+        animation: `slide ${length*2}s linear infinite`,
+    }
 
-        let imageSlider = images.map((image, index) => {
+    let imageSlider = images.map((url, index) => {
             return (
-                <div key={index} className="slide" style={{ animation: {slideShow}}} key={index}>
-                    <img style={{width:'100%',height:'100%'}} src={image} alt="1"></img>
+                <div key={index} className="slide" style={style} key={index}>
+                    <style>{slide}</style>
+                    <img style={{width:'100%',height:'100%', cursor:'pointer'}} src={url} alt={index}></img>
                 </div>
             )
         })
-        console.log(slideShow)
-
 
         return (
             <div className="slider">{imageSlider}</div>
         )
     }
+    
 export default Carousel;
