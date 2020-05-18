@@ -1,6 +1,8 @@
 import React, { Component } from 'react';
 import { fetchPhotos } from '../Fetch-API/api-fetch';
 import { connect } from 'react-redux'
+import Carousel from './Carousel';
+
 class Photos extends Component {
     componentDidMount() {
         const { albumId } = this.props.match.params
@@ -11,41 +13,7 @@ class Photos extends Component {
         const { loading, photos, error } = this.props
 
         return loading === true ?
-            <div>Loading...</div> :
-            <React.Fragment>
-                <div className="Photos-list">
-                    {/* <button className="prev" onClick={this.prevSlide}>
-                         {prev}
-                     </button> */}
-
-                    <div className="slider">
-                        <div className="slides">
-                            {photos.map((url, index) => {
-                                return (
-                                    <div id={index + 1} key={index}>
-                                        <img
-                                            style={{ width: "100%", height: "100%" }}
-                                            src={url}
-                                            alt={index}
-                                        ></img>
-                                    </div>
-                                );
-                            })}
-                        </div>
-
-                        {photos.map((url, index) => {
-                            let targetID = `#${index + 1}`;
-                            return (
-                                <a href={targetID} key={targetID}></a>
-                            );
-                        })}
-                    </div>
-
-                    {/* <button className="next" onClick={this.nextSlide}>
-                        {next}
-                    </button> */}
-                </div>
-            </React.Fragment>
+            <div>Loading...</div> : <Carousel images={photos}/>
     }
 }
 
