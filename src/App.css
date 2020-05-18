@@ -37,101 +37,21 @@
   margin: 0;
 }
 
-.Photos-list{
-  padding: 5%;
-}
-.photo{
-  width:60%;
-  margin: auto;
-  height: 40vw;
-}
-
-
-
-
 
 .slider {
-  width: 60%;
-  text-align: center;
-  overflow: hidden;
+  width: 90%;
   margin: auto;
-}
-
-.slides {
+  height: 40vw;
   display: flex;
-  overflow-x: auto;
-  margin-bottom: 1vw;
-  scroll-behavior: smooth;
-  -webkit-overflow-scrolling: touch;
-  
-}
-.slides::-webkit-scrollbar {
-  width: 10px;
-  height: 10px;
-}
-.slides::-webkit-scrollbar-thumb {
-  background: black;
-  border-radius: 10px;
+  overflow-x: scroll
 }
 
-.slides > div {
-  scroll-snap-align: start;
-  flex-shrink: 0;
-  width: 100%;
-  height: 30vw;
-  margin-right: 50px;
-  border-radius: 10px;
-  transition: transform 0.5s;
-  position: relative;
-  display: flex;
-  justify-content: center;
-  align-items: center;
+.slide {
+  min-width: 100%;
+  height: 100%;
+  overflow-y: hidden;
 }
 
-.slider > a {
-  display: inline-flex;
-  margin-top: 0.5vw;
-  width: 0.6vw;
-  height: 0.6vw;
-  color: black;
-  background: gainsboro;
-  text-decoration: none;
-  align-items: center;
-  justify-content: center;
-  border-radius: 50%;
-  margin: 0 0.5em 0.5rem 0;
-  position: relative;
-}
 
-.slider > a:focus {
-  background: tomato;
-}
 
-.slider > a:hover {
-  background: tomato;
-}
 
-.prev{
-  width: 3vw;
-    height: 3vw;
-    border-radius: 50%;
-    border: antiquewhite;
-    position: absolute;
-    left: 16vw;
-    top: 22vw;
-    font-size: 2vw;
-    font-weight: bold;
-    cursor: pointer;
-}
-.next{
-  width: 3vw;
-    height: 3vw;
-    border-radius: 50%;
-    border: antiquewhite;
-    position: absolute;
-    top: 22vw;
-    right: 16vw;
-    font-size: 2vw;
-    font-weight: bold;
-    cursor: pointer;
-}
