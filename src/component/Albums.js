@@ -4,7 +4,7 @@ import '../App.css'
 import { connect } from 'react-redux'
 import { fetchAlbums } from '../Fetch-API/api-fetch'
 
-class Albums extends Component {
+export class Albums extends Component {
 
     componentDidMount() {
         this.props.albumsList()
@@ -23,7 +23,10 @@ class Albums extends Component {
             )
         })
 
-        return loading === true ? <div>Loading...</div> : <div className="albums-list">{albumsList}</div>
+        return loading === true ? <div>Loading...</div> : 
+        <React.Fragment>
+            <h2>Albums</h2><div className="albums-list">{albumsList}</div>
+        </React.Fragment>
     }
 }
 

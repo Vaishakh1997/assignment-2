@@ -1,7 +1,7 @@
 import React from 'react';
 import { shallow } from 'enzyme';
-
 import * as actions from './index'
+
 
 describe('Albums Action', () => {
 
@@ -18,15 +18,6 @@ describe('Albums Action', () => {
         }
         expect(actions.fetchAlbumsError()).toEqual(albumsError)
     })
-
-    //   it('should create an action to fetch albums success', () => {
-    //       let text = 'albums'
-    //     const albumsSuccess = {
-    //       type: actions.FETCH_ALBUMS_SUCCESS,
-    //       text
-    //     }
-    //     expect(actions.fetchAlbumsSuccess(text)).toEqual(albumsSuccess)
-    //   })
 
 })
 
@@ -46,13 +37,4 @@ describe('Photos Action', () => {
         expect(actions.fetchPhotosError()).toEqual(photosError)
     })
 
-    // it('should create an action to fetch photos success', () => {
-    //     // let text = 'albums'
-    //     const photosSuccess = {
-    //         type: actions.FETCH_PHOTOS_SUCCESS,
-    //         text
-    //     }
-    //     expect(actions.fetchPhotosSuccess(text)).toEqual(photosSuccess)
-    // })
-    
 })

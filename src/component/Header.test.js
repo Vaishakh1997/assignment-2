@@ -10,7 +10,7 @@ describe('Header Component', () => {
         expect(wrapped).toMatchSnapshot();
     });
 
-    it('includes link to Mission scene', () => {
+    it('includes link to Albums', () => {
         expect(wrapped.find('Link').props().to).toBe("/");
     });
 
