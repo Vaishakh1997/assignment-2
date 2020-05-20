@@ -17,7 +17,7 @@ let wrapped = shallow(
 describe("Albums Component", () => {
 
     it("Albums should render without throwing an error", () => {
-        expect(wrapped).toMatchSnapshot();
+        expect(wrapped.debug()).toMatchSnapshot();
     });
     
     // it('includes Header albums', () => {

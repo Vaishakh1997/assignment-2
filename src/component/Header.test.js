@@ -7,7 +7,7 @@ let wrapped = shallow(<Header />);
 describe('Header Component', () => {
 
     it('should render the Header Component correctly', () => {
-        expect(wrapped).toMatchSnapshot();
+        expect(wrapped.debug()).toMatchSnapshot();
     });
 
     it('includes link to Albums', () => {

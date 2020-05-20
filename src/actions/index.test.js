@@ -12,6 +12,15 @@ describe('Albums Action', () => {
         expect(actions.fetchAlbumsRequest()).toEqual(albumsRequest)
     })
 
+    it('should create an action to fetch albums sucsess', () => {
+        const payload = 'payload'
+        const albumsSuccess = {
+            type: actions.FETCH_ALBUMS_SUCCESS,
+            payload
+        }
+        expect(actions.fetchAlbumsSuccess(payload)).toEqual(albumsSuccess)
+    })
+
     it('should create an action to fetch albums error', () => {
         const albumsError = {
             type: actions.FETCH_ALBUMS_ERROR,
@@ -22,12 +31,22 @@ describe('Albums Action', () => {
 })
 
 
+
 describe('Photos Action', () => {
     it('should create an action to fetch photos request', () => {
         const photosRequest = {
             type: actions.FETCH_PHOTOS_REQUEST,
         }
         expect(actions.fetchPhotosRequest()).toEqual(photosRequest)
+    })
+
+    it('should create an action to fetch Photos sucsess', () => {
+        const payload = 'payload'
+        const photosSuccess = {
+            type: actions.FETCH_PHOTOS_SUCCESS,
+            payload
+        }
+        expect(actions.fetchPhotosSuccess(payload)).toEqual(photosSuccess)
     })
 
     it('should create an action to fetch photos error', () => {

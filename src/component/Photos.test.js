@@ -17,7 +17,7 @@ let wrapped = shallow(
 describe("Photos Component", () => {
     
     it("Photos should render without throwing an error", () => {
-        expect(wrapped).toMatchSnapshot();
+        expect(wrapped.debug()).toMatchSnapshot();
     });
     
 });
