@@ -14,13 +14,20 @@ describe('async Fetch albums actions', () => {
     fetchMock.restore()
   })
 
+
   it("handles changing a Albums status", async () => {
-    const store = mockStore();
+    const store = mockStore({ loading: false, albums:[], error:'' });
     store.dispatch(fetchAlbums());
+    
+    fetchMock.get('https://jsonplaceholder.typicode.com/albums', {
+        payload: { albums: ['do something'] }
+      })
+
     expect(await getAction(store, "FETCH_ALBUMS_REQUEST")).toEqual({type: types.FETCH_ALBUMS_REQUEST});
-    // expect(await getAction(store, "FETCH_ALBUMS_SUCCESS")).toEqual({
-    //     type: types.FETCH_ALBUMS_SUCCESS
-    // });
+    expect(await getAction(store, "FETCH_ALBUMS_SUCCESS")).toEqual({
+        type: types.FETCH_ALBUMS_SUCCESS,
+        payload: { albums: ['do something'] }
+    });
   });
   
 })
@@ -37,6 +44,7 @@ describe('async Fetch photos actions', () => {
       const store = mockStore();
       store.dispatch(fetchPhotos());
       expect(await getAction(store, "FETCH_PHOTOS_REQUEST")).toEqual({type: types.FETCH_PHOTOS_REQUEST});
+    //   expect(await getAction(store, "FETCH_PHOTOS_SUCCESS")).toEqual({type: types.FETCH_PHOTOS_SUCCESS, payload});
 
     });
     
