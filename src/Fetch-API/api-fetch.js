@@ -4,7 +4,7 @@ import axios from 'axios'
 export const fetchAlbums = () => {
     return function(dispatch){
         dispatch(fetchAlbumsRequest())
-        axios({
+        return axios({
             method: 'get',
             url: `https://jsonplaceholder.typicode.com/albums`
           })
@@ -18,7 +18,7 @@ export const fetchAlbums = () => {
 export const fetchPhotos = (albumId) => {
     return function(dispatch){
         dispatch(fetchPhotosRequest())
-        axios({
+        return axios({
             method: 'get',
             url: `https://jsonplaceholder.typicode.com/photos?albumId=${albumId}`
           })

@@ -2,82 +2,66 @@ import configureMockStore from 'redux-mock-store'
 import thunk from 'redux-thunk'
 import * as types from '../actions/index'
 import { fetchAlbums, fetchPhotos } from './api-fetch'
-import fetchMock from 'fetch-mock'
+import expect from 'expect'
 import albumsPayload from '../payload/albumsPayload'
 import photosPayload from '../payload/photosPayload'
+import moxios from 'moxios'
+
 
 const middlewares = [thunk]
 const mockStore = configureMockStore(middlewares)
 
+describe('Albums Async actions', () => {
 
-describe('async Fetch albums actions', () => {
-
-  afterEach(() => {
-    fetchMock.restore()
+  beforeEach(function () {
+    moxios.install()
   })
 
-  it("handles changing a Albums status", async () => {
-    const store = mockStore({ loading: false, albums:[], error:'' });
-    store.dispatch(fetchAlbums());
+  afterEach(function () {
+    moxios.uninstall()
+  })
 
-    fetchMock.get('https://jsonplaceholder.typicode.com/albums', {
-        payload: albumsPayload, 
+  it('fetching All albums Successfully', () => {
+    moxios.wait(() => {
+      const request = moxios.requests.mostRecent()
+      request.respondWith({
+        status: 200,
+        response: albumsPayload,
       })
-
-    expect(await getAction(store, "FETCH_ALBUMS_REQUEST")).toEqual({type: types.FETCH_ALBUMS_REQUEST});
-
-    expect(await getAction(store, "FETCH_ALBUMS_SUCCESS")).toEqual({
-        type: types.FETCH_ALBUMS_SUCCESS,
-        payload: albumsPayload
-    });
-  },5000);
-
-})
-
-
-
-describe('async Fetch photos actions', () => {
-
-    afterEach(() => {
-      fetchMock.restore()
     })
-  
-    it("handles changing a photos status", async () => {
-      const store = mockStore({ loading: false, photos:[], error:'' });
-      store.dispatch(fetchPhotos(1));
-  
-      fetchMock.get('https://jsonplaceholder.typicode.com/photos?albumId=1', {
-          payload: photosPayload, 
-        })
-  
-      expect(await getAction(store, "FETCH_PHOTOS_REQUEST")).toEqual({type: types.FETCH_PHOTOS_REQUEST});
-  
-      expect(await getAction(store, "FETCH_PHOTOS_SUCCESS")).toEqual({
-          type: types.FETCH_PHOTOS_SUCCESS,
-          payload: photosPayload
-      });
 
-    }, 20000);
-  
+    const expectedActions = [ 
+        {type: types.FETCH_ALBUMS_REQUEST},
+        {type: types.FETCH_ALBUMS_SUCCESS, payload: albumsPayload}
+    ]
+
+    const store = mockStore()
+
+    return store.dispatch(fetchAlbums()).then(() => {
+      expect(store.getActions()).toEqual(expectedActions)
+    })
   })
 
-
-
-
-
-
-function findAction(store, type) {
-    return store.getActions().find(action => action.type === type);
-  }
   
-function getAction(store, type) {
-    const action = findAction(store, type);
-    if (action) return Promise.resolve(action);
-  
-    return new Promise(resolve => {
-      store.subscribe(() => {
-        const action = findAction(store, type);
-        if (action) resolve(action);
-      });
-    });
-  }
+
+  it('fetching All photos Successfully', () => {
+    moxios.wait(() => {
+      const request = moxios.requests.mostRecent()
+      request.respondWith({
+        status: 200,
+        response: photosPayload,
+      })
+    })
+
+    const expectedActions = [ 
+        {type: types.FETCH_PHOTOS_REQUEST},
+        {type: types.FETCH_PHOTOS_SUCCESS, payload: photosPayload}
+    ]
+
+    const store = mockStore()
+
+    return store.dispatch(fetchPhotos()).then(() => {
+      expect(store.getActions()).toEqual(expectedActions)
+    })
+  })
+})
