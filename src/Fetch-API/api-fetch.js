@@ -23,9 +23,7 @@ export const fetchPhotos = (albumId) => {
             url: `https://jsonplaceholder.typicode.com/photos?albumId=${albumId}`
           })
         .then(response => {
-            var allImageURL = []
-            response.data.map(photo => allImageURL.push(photo.url))
-            dispatch(fetchPhotosSuccess(allImageURL))
+            dispatch(fetchPhotosSuccess(response.data))
         })
         .catch(error => dispatch(fetchPhotosError(error)))
     }
