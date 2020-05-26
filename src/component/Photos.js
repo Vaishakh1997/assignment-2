@@ -3,7 +3,7 @@ import { fetchPhotos } from '../Fetch-API/api-fetch';
 import { connect } from 'react-redux'
 import Carousel from './Carousel';
 
-class Photos extends Component {
+export class Photos extends Component {
     componentDidMount() {
         const { albumId } = this.props.match.params
         this.props.photosList(albumId)
